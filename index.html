@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Aula interativa de Programação Front-End: Semanas 23 e 24 — CI/CD, testes, Docker, Kubernetes, responsividade, animações e JavaScript." name="description"/>
+<title>Front-End | Semanas 23 e 24</title>
+<meta name="color-scheme" content="light dark"/>
+<script>
+(() => {
+  const root = document.documentElement;
+  let saved = null;
+
+  try {
+    saved = localStorage.getItem('theme');
+  } catch (_) {
+    saved = null;
+  }
+
+  if (saved !== 'light' && saved !== 'dark') saved = null;
+
+  const prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches ?? false;
+  const theme = saved || (prefersDark ? 'dark' : 'light');
+
+  root.dataset.theme = theme;
+  root.style.colorScheme = theme;
+})();
+</script>
+<link href="styles.css" rel="stylesheet"/>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+<div aria-hidden="true" class="progress"><span id="readingProgress"></span></div>
+<header class="topbar" id="topo">
+<div class="container topbar__content">
+<a aria-label="Voltar ao início" class="brand" href="#inicio">
+<span class="brand__mark">&lt;/&gt;</span>
+<span><strong>Programação Front-End</strong><small>Semanas 23 + 24</small></span>
+</a>
+<button aria-label="Alternar modo claro e escuro" aria-pressed="false" class="theme-toggle" id="themeToggle" title="Alternar tema" type="button"><span aria-hidden="true" class="theme-toggle__icon">🌙</span><span class="theme-toggle__text">Escuro</span></button><button aria-controls="mainNav" aria-expanded="false" aria-label="Abrir menu" class="menu-toggle" id="menuToggle" type="button">
+<span></span><span></span><span></span>
+</button>
+<nav aria-label="Navegação principal" class="nav" id="mainNav">
+<a href="#inicio">Início</a><a href="#aula1">Aula 1</a>
+<a href="#registro1">Registro 1</a>
+<a href="#aula2">Aula 2</a>
+<a href="#aula3">Aula 3</a>
+<a href="#registro2">Registro 2</a>
+<a href="#materiais">Materiais</a><a href="#quiz">Quiz</a>
+</nav>
+</div>
+</header>
+<main id="conteudo">
+<section class="hero section" id="inicio">
+<div class="container hero__grid">
+<div>
+<span class="eyebrow">3 aulas • 50 minutos cada</span>
+<h1>Da interface ao <span>deploy</span></h1>
+<p class="hero__lead">Uma trilha interativa para conectar responsividade, animações, testes, integração contínua e entrega de aplicações.</p>
+<div class="hero__actions">
+<a class="btn btn--primary" href="#plano">Ver plano das aulas</a>
+<a class="btn btn--ghost" href="#registro1">Ir para os registros</a>
+</div>
+<div class="chips">
+<span>CI/CD</span><span>Jest</span><span>Cypress</span><span>Docker</span>
+<span>Kubernetes</span><span>Media Queries</span><span>Grid</span>
+<span>@keyframes</span><span>JavaScript</span>
+</div>
+</div>
+<aside class="hero-card">
+<p class="hero-card__label">VISÃO GERAL</p>
+<div class="mini-flow">
+<span>Interface</span><b>→</b><span>Responsividade</span><b>→</b>
+<span>Interatividade</span><b>→</b><span>Testes</span><b>→</b>
+<span>CI/CD</span><b>→</b><span>Deploy</span>
+</div>
+<p class="muted">Problema → Analogia → Conceito → Exemplo → Visualização → Prática → Registro</p>
+</aside>
+</div>
+</section>
+<section class="section section--soft" id="plano">
+<div class="container">
+<div class="section-heading">
+<span class="eyebrow">Plano condensado</span>
+<h2>150 minutos com foco no que é viável</h2>
+<p>Configurações pesadas de servidor e SSH ficam como explicação conceitual; o tempo de aula é priorizado para compreensão, visualização e prática.</p>
+</div>
+<div class="timeline-grid">
+<article class="lesson-card">
+<div class="lesson-card__top"><span class="lesson-number">01</span><span>50 min</span></div>
+<h3>CI/CD, testes e deploy</h3>
+<ul>
+<li><strong>10 min</strong> — CI, CD, pipeline, build, test e deploy</li>
+<li><strong>10 min</strong> — GitHub Actions, Jest, Cypress, Docker e Kubernetes</li>
+<li><strong>5 min</strong> — fluxo visual da esteira</li>
+<li><strong>20 min</strong> — Registro 1: mapa mental</li>
+<li><strong>5 min</strong> — correção coletiva</li>
+</ul>
+</article>
+<article class="lesson-card">
+<div class="lesson-card__top"><span class="lesson-number">02</span><span>50 min</span></div>
+<h3>CSS moderno e responsividade</h3>
+<ul>
+<li><strong>10 min</strong> — SASS e LESS</li>
+<li><strong>15 min</strong> — responsividade e Mobile First</li>
+<li><strong>15 min</strong> — Media Queries + CSS Grid</li>
+<li><strong>5 min</strong> — simulador responsivo</li>
+<li><strong>5 min</strong> — revisão rápida</li>
+</ul>
+</article>
+<article class="lesson-card">
+<div class="lesson-card__top"><span class="lesson-number">03</span><span>50 min</span></div>
+<h3>Animações e JavaScript</h3>
+<ul>
+<li><strong>15 min</strong> — transition, transform, @keyframes e eventos</li>
+<li><strong>5 min</strong> — demonstração do professor</li>
+<li><strong>25 min</strong> — Registro 2: prática</li>
+<li><strong>5 min</strong> — fechamento</li>
+</ul>
+</article>
+</div>
+</div>
+</section>
+<section class="section" id="aula1">
+<div class="container">
+<div class="section-heading">
+<span class="eyebrow">Aula 1 • Semana 23</span>
+<h2>Esteiras de entrega contínua</h2>
+<p>Acompanhe o código desde o desenvolvimento até a entrega, entendendo onde entram automação, testes e containers.</p>
+</div>
+<div class="concept-grid">
+<article class="concept-card"><span class="concept-icon">CI</span><h3>Integração Contínua</h3><p>Alterações são integradas com frequência e verificadas automaticamente para reduzir falhas ao juntar código.</p></article>
+<article class="concept-card"><span class="concept-icon">CD</span><h3>Entrega / Deploy Contínuo</h3><p>Automatiza etapas que deixam a aplicação pronta para publicação ou que realizam a implantação.</p></article>
+<article class="concept-card"><span class="concept-icon">⚙</span><h3>Pipeline</h3><p>Sequência automatizada de tarefas. Nesta aula: <strong>build → testes → deploy</strong>.</p></article>
+</div>
+<div class="callout"><strong>Analogia:</strong><span>um pipeline CI/CD funciona como uma linha de produção: o código entra, passa por verificações e só avança quando as etapas anteriores dão certo.</span></div>
+<h3 class="subheading">Pipeline interativo</h3>
+<p class="instruction">Clique em cada etapa para descobrir sua função.</p>
+<div aria-label="Fluxo de CI/CD" class="pipeline" id="pipeline" role="list">
+<button class="pipeline-step is-active" data-text="Cria ou altera o código da aplicação. O processo automatizado começa quando a alteração chega ao repositório." data-title="Desenvolvedor"><span>1</span>Desenvolvedor</button>
+<span class="pipeline-arrow">→</span>
+<button class="pipeline-step" data-text="Envia os commits para o repositório remoto. Um push pode ser usado como gatilho para iniciar o workflow." data-title="Git Push"><span>2</span>Git Push</button>
+<span class="pipeline-arrow">→</span>
+<button class="pipeline-step" data-text="Executa o workflow definido em um arquivo YAML, automatizando etapas como checkout, instalação e testes." data-title="GitHub Actions"><span>3</span>Actions</button>
+<span class="pipeline-arrow">→</span>
+<button class="pipeline-step" data-text="Prepara a aplicação e suas dependências para que ela possa ser verificada e executada." data-title="Build"><span>4</span>Build</button>
+<span class="pipeline-arrow">→</span>
+<button class="pipeline-step" data-text="Verificam automaticamente se a lógica e o comportamento esperado continuam corretos." data-title="Testes"><span>5</span>Testes</button>
+<span class="pipeline-arrow">→</span>
+<button class="pipeline-step" data-text="Empacota a aplicação e suas dependências em um ambiente padronizado." data-title="Docker"><span>6</span>Docker</button>
+<span class="pipeline-arrow">→</span>
+<button class="pipeline-step" data-text="A aplicação é entregue. Em cenários maiores, Kubernetes pode orquestrar várias instâncias e ajudar a manter a aplicação disponível." data-title="Deploy / Kubernetes"><span>7</span>Deploy</button>
+</div>
+<div aria-live="polite" class="pipeline-info" id="pipelineInfo">
+<strong>Desenvolvedor</strong>
+<p>Cria ou altera o código da aplicação. O processo automatizado começa quando a alteração chega ao repositório.</p>
+</div>
+<div class="two-column">
+<article class="panel">
+<div class="panel__header"><span class="tag">TESTES</span><h3>Jest × Cypress</h3></div>
+<div class="comparison">
+<button class="compare-tab is-active" data-target="jestContent">Jest</button>
+<button class="compare-tab" data-target="cypressContent">Cypress</button>
+</div>
+<div class="compare-content is-active" id="jestContent">
+<h4>Jest</h4><p>Foco didático: <strong>testes unitários</strong> para validar a lógica do código.</p>
+<pre><code>expect(somar(2, 3)).toBe(5);</code></pre>
+</div>
+<div class="compare-content" id="cypressContent">
+<h4>Cypress</h4><p>Foco didático: <strong>interação e comportamento da interface</strong> pelo ponto de vista do usuário.</p>
+<pre><code>cy.get('#entrar').click();</code></pre>
+</div>
+</article>
+<article class="panel">
+<div class="panel__header"><span class="tag">DEPLOY</span><h3>Docker × Kubernetes</h3></div>
+<div class="versus">
+<div><span class="tool-badge">Docker</span><h4>A caixa padronizada</h4><p>Empacota aplicação + dependências para executar de forma consistente em diferentes ambientes.</p></div>
+<div><span class="tool-badge tool-badge--alt">Kubernetes</span><h4>O gerente das caixas</h4><p>Orquestra containers, cria réplicas, ajuda em atualizações e pode recuperar instâncias com falha.</p></div>
+</div>
+</article>
+</div>
+<article class="code-card">
+<div class="code-card__head">
+<div><span class="tag">DEMONSTRAÇÃO</span><h3>Workflow simplificado</h3></div>
+<button class="copy-btn" data-copy="workflowCode" type="button">Copiar código</button>
+</div>
+<pre><code id="workflowCode">name: CI
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install
+      - run: npm test</code></pre>
+<p class="code-note">Nesta sequência condensada, SSH, Secrets, servidor e script de deploy ficam como demonstração conceitual, não como exigência do registro.</p>
+</article>
+</div>
+</section>
+<section class="section section--accent" id="registro1">
+<div class="container">
+<div class="section-heading">
+<span class="eyebrow">Registro 1 • Semana 23</span>
+<h2>Mapa Mental — Esteiras de Entrega Contínua</h2>
+<p>Versão adaptada para o tempo disponível: em vez de configurar toda a infraestrutura, a dupla demonstra que compreendeu como os conceitos e ferramentas se conectam.</p>
+</div>
+<div class="source-choice">
+<article class="source-choice__card">
+<span class="tag">DOCUMENTO OFICIAL</span>
+<h3>Roteiro original da SEDUC</h3>
+<p>Consulte a proposta completa de pipeline CI/CD, incluindo configuração técnica e deploy.</p>
+<a class="btn btn--ghost-dark" download="" href="materiais/semana23/roteiro-original-ci-cd.docx">Baixar roteiro original</a>
+</article>
+<article class="source-choice__card source-choice__card--adapted">
+<span class="tag">ATIVIDADE DESTA AULA</span>
+<h3>Roteiro adaptado — Mapa Mental</h3>
+<p>Atividade viável em aproximadamente 20 minutos, com foco na relação entre CI/CD, testes, automação e deploy.</p>
+<a class="btn btn--primary" href="materiais/semana23/roteiro-adaptado-semana23.html">Abrir roteiro adaptado</a>
+</article>
+</div>
+<div class="activity-grid">
+<article class="activity-card activity-card--wide">
+<span class="tag">OBJETIVO</span>
+<h3>O que você deverá demonstrar?</h3>
+<p>Criar um mapa mental mostrando como as tecnologias estudadas durante a Semana 23 se relacionam no processo de desenvolvimento, testes e entrega de uma aplicação.</p>
+<div class="activity-meta">
+<span>👥 Em dupla</span><span>⏱ Aproximadamente 20 min</span><span>📌 Atividade de registro</span>
+</div>
+</article>
+<article class="activity-card activity-card--wide">
+<span class="tag">SITUAÇÃO-PROBLEMA</span>
+<p>Uma equipe de desenvolvimento precisa atualizar uma aplicação com frequência, mas quer reduzir erros e automatizar testes e publicação. Para isso, utiliza práticas de CI/CD, testes automatizados e containers.</p>
+<h3>Tema central</h3>
+<blockquote>CI/CD — Esteiras de Entrega Contínua</blockquote>
+<p><strong>Importante:</strong> não basta listar palavras. Use setas, linhas, ramificações, palavras-chave e pequenas explicações para mostrar as relações entre os conceitos.</p>
+</article>
+<article class="activity-card">
+<span class="tag">CONCEITOS OBRIGATÓRIOS</span>
+<h3>Checklist</h3>
+<div class="checklist" id="mindChecklist">
+<label><input type="checkbox"/> CI</label><label><input type="checkbox"/> CD</label>
+<label><input type="checkbox"/> Pipeline</label><label><input type="checkbox"/> Build</label>
+<label><input type="checkbox"/> Testes</label><label><input type="checkbox"/> Deploy</label>
+<label><input type="checkbox"/> GitHub Actions</label><label><input type="checkbox"/> Jest</label>
+<label><input type="checkbox"/> Cypress</label><label><input type="checkbox"/> Docker</label>
+<label><input type="checkbox"/> Kubernetes</label>
+</div>
+<p class="check-progress"><span id="mindCount">0</span>/11 itens conferidos</p>
+</article>
+<article class="activity-card">
+<span class="tag">ONDE FAZER?</span>
+<h3>Escolha a ferramenta</h3>
+<div class="tool-options">
+<span>📝 Papel ou caderno</span>
+<span>🎨 Canva</span>
+<span>📊 PowerPoint</span>
+<span>🖥 Google Apresentações</span>
+<span>🧠 Ferramenta de mapa mental</span>
+</div>
+<div class="canva-tip"><strong>Sugestão:</strong> no Canva, pesquise por <em>“Mapa Mental”</em> nos modelos, escolha um layout e adapte as ramificações para os conceitos da Semana 23. O uso do Canva é opcional.</div>
+</article>
+</div>
+<div class="steps-card">
+<div class="steps-card__head"><span class="tag">PASSO A PASSO</span><h3>Como construir o mapa</h3></div>
+<ol class="activity-steps">
+<li><strong>Escolha a ferramenta.</strong><span>Papel, Canva, PowerPoint ou outra opção adequada.</span></li>
+<li><strong>Defina o tema central.</strong><span>No centro, escreva “CI/CD — Esteiras de Entrega Contínua”.</span></li>
+<li><strong>Crie os ramos principais.</strong><span>Uma sugestão é: Pipeline, Testes, Automação e Deploy.</span></li>
+<li><strong>Relacione as ferramentas.</strong><span>Jest → testes unitários; Cypress → interface; GitHub Actions → automação; Docker/Kubernetes → entrega e operação.</span></li>
+<li><strong>Mostre o fluxo.</strong><span>Código → Testes → Pipeline → Container → Deploy.</span></li>
+<li><strong>Revise.</strong><span>Use a checklist de 11 conceitos antes de entregar.</span></li>
+</ol>
+</div>
+<div class="mindmap-example">
+<span class="tag">EXEMPLO DE ORGANIZAÇÃO</span>
+<div aria-label="Exemplo de organização do mapa mental" class="mindmap-demo">
+<div class="mind-node mind-node--center">CI/CD</div>
+<div class="mind-branch"><span>Pipeline</span><span>Build</span><span>Testes</span><span>Deploy</span></div>
+<div class="mind-branch"><span>Jest → unitário</span><span>Cypress → interface</span><span>GitHub Actions → automação</span></div>
+<div class="mind-branch"><span>Docker → container</span><span>Kubernetes → orquestração</span></div>
+<div class="flow-highlight">Código → Testes → Pipeline → Container → Deploy</div>
+</div>
+</div>
+<div class="questions-box">
+<h3>Perguntas de registro</h3>
+<ol>
+<li>Qual é a função do Jest?</li>
+<li>Qual é a função do Cypress?</li>
+<li>O que um pipeline CI/CD automatiza?</li>
+<li>Qual é a função do Docker?</li>
+<li>Qual é a diferença entre Docker e Kubernetes?</li>
+</ol>
+<div class="evidence"><strong>Entrega:</strong><span>foto ou print do mapa mental + respostas curtas das cinco perguntas.</span></div>
+<div class="assessment-box">
+<strong>O que será avaliado?</strong>
+<span>Conceitos obrigatórios • organização visual • relações entre conceitos • clareza • CI/CD • Jest × Cypress • Docker × Kubernetes • perguntas respondidas.</span>
+</div>
+<button class="btn btn--light" id="printRegistro1" type="button">Imprimir / salvar roteiro</button>
+</div>
+</div>
+</section>
+<section class="section" id="aula2">
+<div class="container">
+<div class="section-heading">
+<span class="eyebrow">Aula 2 • Semana 24</span>
+<h2>CSS moderno e responsividade</h2>
+<p>O objetivo é entender como organizar estilos e fazer um layout se adaptar a diferentes dispositivos.</p>
+</div>
+<div class="two-column">
+<article class="panel">
+<div class="panel__header"><span class="tag">PRÉ-PROCESSADORES</span><h3>SASS e LESS</h3></div>
+<p>Pré-processadores ampliam a forma de organizar e reutilizar estilos. Nesta sequência, o foco é <strong>conceitual</strong>: não gastar a aula instalando ferramentas.</p>
+<div class="before-after">
+<div><span>CSS</span><pre><code>.botao {
+  background: #e63946;
+}
+
+.botao:hover {
+  background: #b91c2b;
+}</code></pre></div>
+<div><span>SASS (exemplo)</span><pre><code>$cor: #e63946;
+
+.botao {
+  background: $cor;
+
+  &amp;:hover {
+    background: darken($cor, 10%);
+  }
+}</code></pre></div>
+</div>
+</article>
+<article class="panel">
+<div class="panel__header"><span class="tag">IDEIA-CHAVE</span><h3>Mobile First</h3></div>
+<p>Comece pelo menor espaço disponível e adicione melhorias para telas maiores. Isso ajuda a priorizar conteúdo e evita tentar “encolher” um desktop pronto.</p>
+<div class="device-flow"><span>📱<small>Mobile</small></span><b>→</b><span>▣<small>Tablet</small></span><b>→</b><span>🖥<small>Desktop</small></span></div>
+</article>
+</div>
+<article class="lab">
+<div class="lab__head">
+<div><span class="tag">LABORATÓRIO VISUAL</span><h3>Simulador de responsividade</h3></div>
+<div aria-label="Escolher tamanho de tela" class="device-buttons" role="group">
+<button data-device="mobile" type="button">📱 Mobile</button>
+<button data-device="tablet" type="button">▣ Tablet</button>
+<button class="is-active" data-device="desktop" type="button">🖥 Desktop</button>
+</div>
+</div>
+<div class="responsive-stage">
+<div class="mock-browser mock-browser--desktop" id="responsivePreview">
+<div class="mock-browser__bar"><i></i><i></i><i></i><span>meusite.dev</span></div>
+<div class="mock-page">
+<header>Meu Portfólio</header>
+<div class="mock-grid"><article>Card 1</article><article>Card 2</article><article>Card 3</article><article>Card 4</article></div>
+</div>
+</div>
+</div>
+<div class="concept-pair">
+<div><h4>Media Query</h4><pre><code>@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}</code></pre></div>
+<div><h4>Grid flexível</h4><pre><code>.grid {
+  display: grid;
+  grid-template-columns:
+    repeat(auto-fit, minmax(220px, 1fr));
+}</code></pre></div>
+</div>
+</article>
+</div>
+</section>
+<section class="section section--dark" id="aula3">
+<div class="container">
+<div class="section-heading">
+<span class="eyebrow">Aula 3 • Semana 24</span>
+<h2>Animações, transições e JavaScript</h2>
+<p>Perceba a diferença entre uma mudança suavizada, uma animação com etapas e uma interação disparada pelo usuário.</p>
+</div>
+<div class="concept-grid">
+<article class="concept-card concept-card--dark"><span class="concept-icon">T</span><h3>transition</h3><p>Suaviza a mudança entre estados, como hover, cor, tamanho ou posição.</p></article>
+<article class="concept-card concept-card--dark"><span class="concept-icon">K</span><h3>@keyframes</h3><p>Define etapas de uma animação, permitindo controlar início, meio e fim.</p></article>
+<article class="concept-card concept-card--dark"><span class="concept-icon">JS</span><h3>Eventos</h3><p>O JavaScript reage a ações como cliques e pode adicionar/remover classes CSS.</p></article>
+</div>
+<article class="animation-lab">
+<div>
+<span class="tag">DEMONSTRAÇÃO</span><h3>Teste os três conceitos</h3><p>Clique nos botões e observe o elemento ao lado.</p>
+<div class="animation-controls">
+<button data-animation="transition" type="button">Transition</button>
+<button data-animation="keyframes" type="button">@keyframes</button>
+<button data-animation="javascript" type="button">JavaScript</button>
+<button data-animation="reset" type="button">Resetar</button>
+</div>
+</div>
+<div class="animation-stage">
+<div class="demo-box" id="demoBox"><span>&lt;div&gt;</span></div>
+<p id="animationExplanation">Escolha uma demonstração.</p>
+</div>
+</article>
+<article class="code-card code-card--dark">
+<div class="code-card__head">
+<div><span class="tag">PADRÃO DA ATIVIDADE</span><h3>JavaScript adicionando uma classe</h3></div>
+<button class="copy-btn copy-btn--dark" data-copy="jsClassCode" type="button">Copiar código</button>
+</div>
+<pre><code id="jsClassCode">const card = document.querySelector('.card');
+
+card.addEventListener('click', () =&gt; {
+  card.classList.toggle('ativo');
+});</code></pre>
+<p class="code-note">A lógica é simples: <strong>ação do usuário → evento JavaScript → classe CSS → mudança visual</strong>.</p>
+</article>
+</div>
+</section>
+<section class="section section--accent2" id="registro2">
+<div class="container">
+<div class="section-heading">
+<span class="eyebrow">Registro 2 • Semana 24</span>
+<h2>Prática — Animações e Interatividade</h2>
+<p>O projeto-base já está estruturado. O estudante concentra o tempo nas três habilidades que realmente precisam ser praticadas.</p>
+</div>
+<div class="task-grid">
+<article class="task-card"><span class="task-number">01</span><h3>Transition</h3><p>Aplicar uma transição suave em um botão, card, link ou imagem.</p><code>transition: 0.3s ease;</code></article>
+<article class="task-card"><span class="task-number">02</span><h3>@keyframes</h3><p>Criar uma animação simples com deslocamento, opacidade ou outro efeito discreto.</p><code>@keyframes entrada { ... }</code></article>
+<article class="task-card"><span class="task-number">03</span><h3>JavaScript</h3><p>Usar evento de clique e alterar uma classe do elemento.</p><code>classList.toggle('ativo')</code></article>
+</div>
+<div class="questions-box questions-box--light">
+<h3>Evidências</h3>
+<ul>
+<li>link do repositório GitHub;</li><li>print do site funcionando;</li>
+<li>trecho/print do CSS com <code>transition</code> ou <code>@keyframes</code>;</li>
+<li>trecho/print do JavaScript utilizado.</li>
+</ul>
+<a class="btn btn--primary" href="atividade-registro2/index.html">Abrir projeto-base do Registro 2</a>
+</div>
+</div>
+</section>
+<section class="section section--soft" id="materiais">
+<div class="container">
+<div class="section-heading">
+<span class="eyebrow">Materiais das aulas</span>
+<h2>Apresentações e roteiros disponíveis</h2>
+<p>Os arquivos originais foram mantidos e organizados por semana. Use os botões para baixar as apresentações e os roteiros.</p>
+</div>
+<div class="materials-week">
+<div class="materials-week__head"><div><span class="week-number">23</span></div><div><h3>Semana 23</h3><p>Integração com serviços externos e esteiras de entrega.</p></div></div>
+<div class="materials-grid">
+<article class="material-card"><span class="material-icon">📘</span><span class="tag">AULA 1 • PPTX</span><h4>Configuração de pipelines CI/CD</h4><p>Pipeline, build, testes e automação de deploys.</p><a class="btn btn--primary" download="" href="materiais/semana23/aula1-configuracao-pipelines-ci-cd.pptx">Baixar material</a></article>
+<article class="material-card"><span class="material-icon">🧪</span><span class="tag">AULA 2 • PPTX</span><h4>Testes com Jest e Cypress</h4><p>Testes unitários, cobertura e interações na interface.</p><a class="btn btn--primary" download="" href="materiais/semana23/aula2-testes-jest-cypress.pptx">Baixar material</a></article>
+<article class="material-card"><span class="material-icon">📦</span><span class="tag">AULA 3 • PPTX</span><h4>Docker e Kubernetes</h4><p>Containers, orquestração e deploy contínuo.</p><a class="btn btn--primary" download="" href="materiais/semana23/aula3-docker-kubernetes.pptx">Baixar material</a></article>
+<article class="material-card material-card--document"><span class="material-icon">📄</span><span class="tag">ROTEIRO ORIGINAL • DOCX</span><h4>Pipeline CI/CD para automação de deploys</h4><p>Documento original da atividade prática.</p><a class="btn btn--ghost-dark" download="" href="materiais/semana23/roteiro-original-ci-cd.docx">Baixar roteiro original</a></article>
+<article class="material-card material-card--adapted"><span class="material-icon">✏️</span><span class="tag">ROTEIRO ADAPTADO • HTML</span><h4>Mapa Mental — Esteiras de Entrega Contínua</h4><p>Versão adaptada para a aula, incluindo instruções e opção de uso do Canva.</p><a class="btn btn--primary" href="materiais/semana23/roteiro-adaptado-semana23.html">Abrir roteiro adaptado</a></article>
+</div>
+</div>
+<div class="materials-week">
+<div class="materials-week__head"><div><span class="week-number week-number--blue">24</span></div><div><h3>Semana 24</h3><p>Ferramentas avançadas para estilização.</p></div></div>
+<div class="materials-grid">
+<article class="material-card"><span class="material-icon">🎨</span><span class="tag">AULA 1 • PPTX</span><h4>Pré-processadores CSS</h4><p>SASS, LESS e organização avançada dos estilos.</p><a class="btn btn--primary" download="" href="materiais/semana24/aula1-pre-processadores-css.pptx">Baixar material</a></article>
+<article class="material-card"><span class="material-icon">📱</span><span class="tag">AULA 2 • PPTX</span><h4>Design responsivo</h4><p>Media Queries, Grid flexível e adaptação de layouts.</p><a class="btn btn--primary" download="" href="materiais/semana24/aula2-design-responsivo.pptx">Baixar material</a></article>
+<article class="material-card"><span class="material-icon">✨</span><span class="tag">AULA 3 • PPTX</span><h4>Animações, transições e JavaScript</h4><p>Transition, @keyframes e interatividade no navegador.</p><a class="btn btn--primary" download="" href="materiais/semana24/aula3-animacoes-transicoes-js.pptx">Baixar material</a></article>
+<article class="material-card material-card--document"><span class="material-icon">📄</span><span class="tag">ROTEIRO ORIGINAL • DOCX</span><h4>Implementação de animações e transições</h4><p>Documento original da atividade prática da Semana 24.</p><a class="btn btn--ghost-dark" download="" href="materiais/semana24/roteiro-original-animacoes.docx">Baixar roteiro original</a></article>
+</div>
+</div>
+</div>
+</section><section class="section" id="quiz">
+<div class="container quiz-container">
+<div class="section-heading">
+<span class="eyebrow">Revisão final</span>
+<h2>Quiz das Semanas 23 e 24</h2>
+<p>Responda e receba feedback imediato. O placar é atualizado a cada questão.</p>
+</div>
+<div class="quiz-score"><span>Acertos</span><strong><span id="scoreValue">0</span>/<span id="scoreTotal">0</span></strong></div>
+<div class="quiz-list" id="quizList"></div>
+<button class="btn btn--ghost-dark" id="resetQuiz" type="button">Refazer quiz</button>
+</div>
+</section>
+<section class="section section--soft" id="fechamento">
+<div class="container">
+<div class="final-flow"><span>Interface</span><b>→</b><span>Responsividade</span><b>→</b><span>Interatividade</span><b>→</b><span>Testes</span><b>→</b><span>CI/CD</span><b>→</b><span>Deploy</span></div>
+<h2 class="center">O objetivo é enxergar o processo inteiro.</h2>
+<p class="center muted">Não é decorar ferramentas isoladas, e sim entender por que cada uma aparece no ciclo de desenvolvimento.</p>
+<div class="center"><a class="btn btn--ghost-dark" href="#topo">Voltar ao topo</a></div>
+</div>
+</section>
+</main>
+<footer class="footer">
+<div class="container footer__content">
+<div><strong>Programação Front-End</strong><p>Material didático condensado — Semanas 23 e 24.</p></div>
+<p>Materiais originais organizados para consulta e atividades adaptadas para a sequência de 3 aulas.</p>
+</div>
+</footer>
+<div aria-live="polite" class="toast" id="toast" role="status">Código copiado!</div>
+<script src="script.js"></script>
+</body>
+</html>

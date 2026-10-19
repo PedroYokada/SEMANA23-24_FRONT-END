@@ -1,0 +1,174 @@
+/* Projeto-base do Registro 2 — procure os comentários TODO. */
+:root {
+  --bg: #f4f6fa;
+  --surface: #ffffff;
+  --text: #20293a;
+  --muted: #687386;
+  --primary: #df2935;
+  --dark: #182234;
+  --border: #dde3ea;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+}
+
+.container { width: min(calc(100% - 32px), 1000px); margin-inline: auto; }
+
+.hero {
+  padding: 70px 0 40px;
+  color: white;
+  background: var(--dark);
+}
+
+.hero h1 {
+  margin: .4rem 0;
+  font-size: clamp(2.3rem, 7vw, 4.8rem);
+}
+
+.hero p { color: #c2cede; }
+
+.badge {
+  display: inline-block;
+  padding: .35rem .55rem;
+  border-radius: 8px;
+  background: var(--primary);
+  font-weight: bold;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  padding: .55rem .8rem;
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 8px;
+
+  /* TODO 1:
+     Adicione uma transition.
+     Objetivo: deixar o hover abaixo mais suave.
+  */
+}
+
+nav a:hover {
+  background: var(--primary);
+  transform: translateY(-2px);
+}
+
+.section { padding: 60px 0; }
+.section--soft { background: #e9eef5; }
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 24px;
+}
+
+.photo-card {
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: var(--surface);
+  box-shadow: 0 10px 25px rgba(0,0,0,.07);
+  cursor: pointer;
+
+  /* TODO 1 também pode ser feito aqui:
+     crie uma transition para transform, box-shadow ou outra propriedade.
+  */
+}
+
+.photo {
+  min-height: 190px;
+  background-size: cover;
+  background-position: center;
+}
+
+.photo--1 {
+  background:
+    linear-gradient(135deg, rgba(18,34,52,.15), rgba(223,41,53,.28)),
+    linear-gradient(120deg, #617791, #182234);
+}
+
+.photo--2 {
+  background:
+    radial-gradient(circle at 30% 30%, #dbe78d, transparent 25%),
+    linear-gradient(135deg, #486b45, #8fb36f);
+}
+
+.photo--3 {
+  background:
+    radial-gradient(circle at 70% 25%, #f6c767, transparent 12%),
+    linear-gradient(145deg, #181c34, #4d3d66);
+}
+
+.photo-card__body { padding: 18px; }
+.photo-card__body h3 { margin: 0; }
+.photo-card__body p { margin-bottom: 0; color: var(--muted); }
+
+/* TODO 2:
+   Crie uma animação com @keyframes.
+   Sugestão:
+   - opacity: 0 -> 1
+   - translateY(20px) -> translateY(0)
+
+   Depois aplique a animação nos .photo-card.
+*/
+
+/* TODO 3:
+   A classe abaixo será adicionada/removida pelo JavaScript.
+   Personalize o visual do card quando ele estiver ativo.
+*/
+.photo-card.ativo { outline: 3px solid var(--primary); }
+
+.tasks { display: grid; gap: 10px; }
+
+.tasks article {
+  display: flex;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: white;
+}
+
+.tasks strong {
+  display: grid;
+  place-items: center;
+  flex: 0 0 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: white;
+}
+
+.hint {
+  margin-top: 22px;
+  padding: 14px 16px;
+  border-left: 4px solid var(--primary);
+  background: white;
+}
+
+footer {
+  padding: 28px;
+  color: white;
+  background: var(--dark);
+  text-align: center;
+}
+
+@media (max-width: 720px) {
+  .gallery { grid-template-columns: 1fr; }
+}

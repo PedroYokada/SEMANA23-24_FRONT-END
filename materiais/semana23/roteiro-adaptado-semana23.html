@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roteiro Adaptado — Semana 23</title>
+<meta name="color-scheme" content="light dark">
+<script>
+(() => {
+  let saved = null;
+  try { saved = localStorage.getItem('theme'); } catch (_) {}
+  if (saved !== 'light' && saved !== 'dark') saved = null;
+  const theme = saved || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  document.documentElement.dataset.theme = theme;
+  document.documentElement.style.colorScheme = theme;
+})();
+</script>
+<style>
+:root{
+  --red:#e31e2d;--red-dark:#b81421;--text:#172033;--muted:#5f6b7a;
+  --bg:#f6f7fb;--card:#fff;--soft:#eef2f7;--border:#dce3ec;
+  --flow:#172033;--flow-text:#fff;--shadow:0 10px 28px rgba(31,45,61,.10)
+}
+html{color-scheme:light;background:var(--bg)}
+html[data-theme="dark"]{
+  color-scheme:dark;--text:#edf3fb;--muted:#b4c0cf;--bg:#0b111b;
+  --card:#121c2a;--soft:#1a2738;--border:#304057;--flow:#0a111c;
+  --flow-text:#edf3fb;--shadow:0 10px 28px rgba(0,0,0,.28)
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 Arial,sans-serif;overflow-x:hidden}
+.wrap{width:min(920px,calc(100% - 28px));margin:32px auto}
+.hero,.card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:26px;margin-bottom:16px;box-shadow:var(--shadow)}
+.hero{border-top:7px solid var(--red)}
+h1{margin:.2rem 0;font-size:clamp(2rem,6vw,3.5rem);line-height:1.05}
+h2{margin-top:0}.tag{font-weight:800;color:var(--red);font-size:.8rem}
+.meta,.tools{display:flex;flex-wrap:wrap;gap:8px}
+.meta span,.tools span{padding:.5rem .7rem;background:var(--soft);color:var(--text);border:1px solid var(--border);border-radius:999px}
+.flow{padding:14px;background:var(--flow);color:var(--flow-text);border-radius:12px;text-align:center;font-weight:800;overflow-x:auto}
+.steps{counter-reset:item;list-style:none;padding:0}.steps li{counter-increment:item;display:grid;grid-template-columns:38px minmax(0,1fr);gap:10px;margin:12px 0}
+.steps li:before{content:counter(item);display:grid;place-items:center;width:34px;height:34px;background:var(--red);color:#fff;border-radius:50%;font-weight:800}
+.tip{padding:15px;border-left:4px solid var(--red);background:var(--soft);border-radius:0 10px 10px 0}
+.actions{display:flex;gap:10px;flex-wrap:wrap}.btn{border:1px solid transparent;border-radius:10px;padding:.7rem 1rem;background:var(--red);color:white;text-decoration:none;font-weight:800;cursor:pointer}
+.btn:hover{background:var(--red-dark)}
+.theme-status{font-size:.85rem;color:var(--muted);margin-left:auto;align-self:center}
+@media print{.actions{display:none}.wrap{width:100%;margin:0}.card,.hero{box-shadow:none;break-inside:avoid}}
+@media(max-width:560px){.wrap{width:min(100% - 18px,920px);margin:16px auto}.hero,.card{padding:20px}.steps li{grid-template-columns:32px minmax(0,1fr)}.actions .btn{width:100%;text-align:center}.theme-status{width:100%;margin-left:0}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<section class="hero"><span class="tag">PROGRAMAÇÃO FRONT-END • SEMANA 23</span><h1>Mapa Mental — Esteiras de Entrega Contínua</h1><p>Roteiro adaptado para a sequência condensada de três aulas.</p><div class="meta"><span>👥 Em dupla</span><span>⏱ 20 minutos</span><span>📌 Registro</span></div></section>
+<section class="card"><h2>Objetivo</h2><p>Criar um mapa mental demonstrando como as tecnologias estudadas na Semana 23 se relacionam no processo de desenvolvimento, testes e entrega de uma aplicação.</p></section>
+<section class="card"><h2>Tema central</h2><div class="flow">CI/CD — Esteiras de Entrega Contínua</div><p>O mapa deve conter: <strong>CI, CD, Pipeline, Build, Testes, Deploy, GitHub Actions, Jest, Cypress, Docker e Kubernetes.</strong></p><p>Não basta listar os termos. Use setas, linhas, ramificações, palavras-chave e pequenas explicações para mostrar as relações.</p></section>
+<section class="card"><h2>Onde posso fazer?</h2><div class="tools"><span>📝 Caderno ou folha</span><span>🎨 Canva</span><span>📊 PowerPoint</span><span>🖥 Google Apresentações</span><span>🧠 Outra ferramenta de mapa mental</span></div><p class="tip"><strong>Sugestão:</strong> no Canva, pesquise por “Mapa Mental” nos modelos disponíveis. Escolha um modelo e adapte as ramificações para o conteúdo da Semana 23. O Canva é opcional.</p></section>
+<section class="card"><h2>Passo a passo</h2><ol class="steps"><li><div><strong>Escolha a ferramenta.</strong><br>Papel, Canva, PowerPoint ou outra opção.</div></li><li><div><strong>Defina o tema central.</strong><br>CI/CD — Esteiras de Entrega Contínua.</div></li><li><div><strong>Crie os ramos principais.</strong><br>Sugestão: Pipeline, Testes, Automação e Deploy.</div></li><li><div><strong>Relacione as ferramentas.</strong><br>Jest → testes unitários; Cypress → interface; GitHub Actions → automação; Docker → containers; Kubernetes → orquestração.</div></li><li><div><strong>Mostre o fluxo.</strong><br><div class="flow">Código → Testes → Pipeline → Container → Deploy</div></div></li><li><div><strong>Revise.</strong><br>Confira se os 11 conceitos estão presentes e ligados de forma coerente.</div></li></ol></section>
+<section class="card"><h2>Perguntas de registro</h2><ol><li>Qual é a função do Jest?</li><li>Qual é a função do Cypress?</li><li>O que um pipeline CI/CD automatiza?</li><li>Qual é a função do Docker?</li><li>Qual é a diferença entre Docker e Kubernetes?</li></ol><p><strong>Entrega:</strong> foto ou print do mapa mental + respostas curtas das cinco perguntas.</p></section>
+<section class="card"><h2>O que será avaliado?</h2><p>Presença dos conceitos obrigatórios, organização visual, relação entre os conceitos, clareza, compreensão de CI/CD, diferença entre Jest e Cypress, diferença entre Docker e Kubernetes e conclusão das perguntas.</p><div class="actions"><button class="btn" id="themeBtn" type="button" aria-pressed="false">🌙 Ativar modo escuro</button><span class="theme-status" id="themeStatus" aria-live="polite"></span><button class="btn" onclick="window.print()">Imprimir / salvar em PDF</button><a class="btn" href="roteiro-original-ci-cd.docx" download>Baixar roteiro original</a></div></section>
+</main>
+<script>
+const themeBtn = document.getElementById('themeBtn');
+const themeStatus = document.getElementById('themeStatus');
+
+function saveThemeSafely(theme) {
+  try { localStorage.setItem('theme', theme); } catch (_) {}
+}
+
+function syncThemeButton() {
+  const dark = document.documentElement.dataset.theme === 'dark';
+  document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
+  themeBtn.setAttribute('aria-pressed', String(dark));
+  themeBtn.textContent = dark ? '☀️ Ativar modo claro' : '🌙 Ativar modo escuro';
+  themeStatus.textContent = dark ? 'Modo escuro ativo' : 'Modo claro ativo';
+}
+
+syncThemeButton();
+
+themeBtn.addEventListener('click', () => {
+  const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+  document.documentElement.dataset.theme = next;
+  saveThemeSafely(next);
+  syncThemeButton();
+});
+</script>
+</body></html>
